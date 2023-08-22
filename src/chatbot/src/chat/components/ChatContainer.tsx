@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import History from "./History";
+import History, { Message } from "./History";
 import { getCompletion } from "../services";
-
-interface Message {
-  type: "request" | "response";
-  text: string;
-}
 
 function ChatContainer() {
   const [history, setHistory] = useState<Message[]>([]);

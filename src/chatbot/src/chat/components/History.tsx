@@ -1,7 +1,7 @@
 import './History.css';
 
-interface Message {
-  type: 'request' | 'response';
+export type Message = {
+  type: "request" | "response";
   text: string;
 }
 
