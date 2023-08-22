@@ -1,4 +1,4 @@
-import { CompletionRequest, CompletionResponse } from "../models";
+import { CompletionRequest, CompletionResponse } from "./models";
 
 export async function getCompletion(message: string): Promise<string> {
   const requestModel: CompletionRequest = {

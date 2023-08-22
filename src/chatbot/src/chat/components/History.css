@@ -1,0 +1,21 @@
+.message {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  max-width: 80%;
+  color: #333;
+}
+
+.request {
+  background-color: #007bff;
+  text-align: right;
+  margin-left: auto;
+  color: #fff;
+}
+
+.response {
+  background-color: #dc3545;
+  text-align: left;
+  margin-right: auto;
+  color: #fff;
+}

@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import History from "./History";
-import { getCompletion } from "./services";
+import { getCompletion } from "../services";
+
+interface Message {
+  type: "request" | "response";
+  text: string;
+}
 
 function ChatContainer() {
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(event.target.value);
   };
 
-  const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+  const handleKeyDown = async (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
       await handleSendClick();
     }
   };
 
   const handleSendClick = async () => {
-    // to add the new message to the list of old messages.
-    // Then clear the input field.
     if (newMessage === "") return;
     const response = await getCompletion(newMessage);
-    setHistory(history.concat(newMessage).concat(response));
+    setHistory((prevHistory) => [
+      ...prevHistory,
+      { type: "request", text: newMessage },
+      { type: "response", text: response },
+    ]);
     setNewMessage("");
   };
 
