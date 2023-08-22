@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import History from "./History";
+import { getCompletion } from "./services";
 
 function ChatContainer() {
   const [history, setHistory] = useState<string[]>([]);
@@ -9,10 +10,18 @@ function ChatContainer() {
     setNewMessage(event.target.value);
   };
 
-  const handleSendClick = () => {
+  const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      await handleSendClick();
+    }
+  };
+
+  const handleSendClick = async () => {
     // to add the new message to the list of old messages.
     // Then clear the input field.
-    setHistory(history.concat(newMessage));
+    if (newMessage === "") return;
+    const response = await getCompletion(newMessage);
+    setHistory(history.concat(newMessage).concat(response));
     setNewMessage("");
   };
 
@@ -39,6 +48,7 @@ function ChatContainer() {
           placeholder="Type your message here"
           value={newMessage}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           style={{ flex: 1, padding: "10px", fontSize: "16px" }}
         />
         <button

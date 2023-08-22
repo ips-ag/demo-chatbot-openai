@@ -7,5 +7,6 @@ namespace ChatBot.Api.OpenAi.Models;
 public class CompletionRequest
 {
     [Required]
+    [DataMember(Name = "message")]
     public required string Message { get; set; }
 }
