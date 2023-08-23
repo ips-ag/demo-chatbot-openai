@@ -8,7 +8,8 @@ public static class OpenAiExtensions
     {
         services.AddOptions<OpenAiOptions>()
             .BindConfiguration(OpenAiOptions.SectionName)
-            .ValidateDataAnnotations();
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
         services.AddSingleton<OpenAiService>();
         return services;
     }
