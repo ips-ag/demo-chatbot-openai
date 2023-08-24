@@ -1,50 +1,57 @@
-import React, { useState } from "react";
-import History, { Message } from "./History";
-import { getCompletion } from "../services";
+import React, { useState } from 'react';
+import History, { Message } from './History';
+import { getCompletion } from '../services';
 
 function ChatContainer() {
   const [history, setHistory] = useState<Message[]>([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(event.target.value);
   };
 
-  const handleKeyDown = async (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (event.key === "Enter") {
+  const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
       await handleSendClick();
     }
   };
 
   const handleSendClick = async () => {
-    if (newMessage === "") return;
+    if (newMessage === '') return;
     const response = await getCompletion(newMessage);
     setHistory((prevHistory) => [
       ...prevHistory,
-      { type: "request", text: newMessage },
-      { type: "response", text: response },
+      { type: 'request', text: newMessage },
+      { type: 'response', text: response },
     ]);
-    setNewMessage("");
+    setNewMessage('');
   };
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh", minWidth: "70vw" }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: '100vh',
+        width: '95%',
+        margin: '0 auto',
+        padding: '20px',
+        boxSizing: 'border-box',
+      }}
+    >
       {/* Old chat messages */}
       <History messages={history} />
 
       {/* New message input */}
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: "10px",
+          display: 'flex',
+          alignItems: 'center',
+          width: '80%',
+          marginTop: '20px',
+          marginBottom: '20px',
         }}
       >
         <input
@@ -53,14 +60,14 @@ function ChatContainer() {
           value={newMessage}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          style={{ flex: 1, padding: "10px", fontSize: "16px" }}
+          style={{ flex: 1, padding: '10px', fontSize: '16px' }}
         />
         <button
           onClick={handleSendClick}
           style={{
-            marginLeft: "10px",
-            padding: "10px",
-            fontSize: "16px",
+            marginLeft: '10px',
+            padding: '10px',
+            fontSize: '16px',
           }}
         >
           Send

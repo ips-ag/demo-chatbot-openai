@@ -1,9 +1,9 @@
 import './History.css';
 
 export type Message = {
-  type: "request" | "response";
+  type: 'request' | 'response';
   text: string;
-}
+};
 
 interface Props {
   messages: Message[];
@@ -12,7 +12,7 @@ interface Props {
 function History(props: Props) {
   const { messages } = props;
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       {messages.map((message, index) => (
         <p key={index} className={`message ${message.type}`}>
           {message.text}
