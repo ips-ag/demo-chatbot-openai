@@ -3,7 +3,6 @@
   margin: 5px;
   border-radius: 5px;
   max-width: 80%;
-  color: #333;
 }
 
 .request {
@@ -11,6 +10,8 @@
   text-align: right;
   margin-left: auto;
   color: #fff;
+  float: right;
+  clear: both;
 }
 
 .response {
@@ -18,4 +19,6 @@
   text-align: left;
   margin-right: auto;
   color: #fff;
+  float: left;
+  clear: both;
 }

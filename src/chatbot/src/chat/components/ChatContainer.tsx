@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import History, { Message } from './History';
 import { getCompletion } from '../services';
+import './ChatContainer.css';
 
 function ChatContainer() {
   const [history, setHistory] = useState<Message[]>([]);
@@ -28,39 +29,21 @@ function ChatContainer() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '100vh',
-        width: '95%',
-        margin: '0 auto',
-        padding: '20px',
-        boxSizing: 'border-box',
-      }}
-    >
+    <div className="chat-container">
       {/* Old chat messages */}
-      <History messages={history} />
+      <div className="history">
+        <History messages={history} />
+      </div>
 
       {/* New message input */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          width: '80%',
-          marginTop: '20px',
-          marginBottom: '20px',
-        }}
-      >
+      <div className="text-input">
         <input
           type="text"
           placeholder="Type your message here"
           value={newMessage}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          style={{ flex: 1, padding: '10px', fontSize: '16px' }}
+          style={{ width: '80%', minWidth: 200, padding: '10px', fontSize: '16px' }}
         />
         <button
           onClick={handleSendClick}
