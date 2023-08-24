@@ -45,14 +45,7 @@ function ChatContainer() {
           onKeyDown={handleKeyDown}
           style={{ width: '80%', minWidth: 200, padding: '10px', fontSize: '16px' }}
         />
-        <button
-          onClick={handleSendClick}
-          style={{
-            marginLeft: '10px',
-            padding: '10px',
-            fontSize: '16px',
-          }}
-        >
+        <button onClick={handleSendClick} style={{ marginLeft: '10px', padding: '10px', fontSize: '16px' }}>
           Send
         </button>
       </div>
