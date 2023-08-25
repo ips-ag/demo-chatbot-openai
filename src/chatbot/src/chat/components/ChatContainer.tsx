@@ -30,12 +30,9 @@ function ChatContainer() {
 
   return (
     <div className="chat-container">
-      {/* Old chat messages */}
       <div className="history">
         <History messages={history} />
       </div>
-
-      {/* New message input */}
       <div className="text-input">
         <input
           type="text"
@@ -43,11 +40,8 @@ function ChatContainer() {
           value={newMessage}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          style={{ width: '80%', minWidth: 200, padding: '10px', fontSize: '16px' }}
         />
-        <button onClick={handleSendClick} style={{ marginLeft: '10px', padding: '10px', fontSize: '16px' }}>
-          Send
-        </button>
+        <button onClick={handleSendClick}>Send</button>
       </div>
     </div>
   );

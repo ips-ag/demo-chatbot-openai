@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import './History.css';
 
 export type Message = {
@@ -11,14 +12,25 @@ interface Props {
 
 function History(props: Props) {
   const { messages } = props;
+  const historyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (historyRef.current) {
+      historyRef.current.scrollTo({
+        top: historyRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [messages]);
+
   return (
-    <>
+    <div ref={historyRef} className="history">
       {messages.map((message, index) => (
         <p key={index} className={`message ${message.type}`}>
           {message.text}
         </p>
       ))}
-    </>
+    </div>
   );
 }
 
