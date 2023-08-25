@@ -1,7 +1,7 @@
 import { Message, MessageType } from '../components/History';
 import { CompletionRequestModel, CompletionResponseModel, MessageTypeModel } from './models';
 
-export async function getCompletion(messages: Message[]): Promise<string> {
+export async function getCompletion(messages: Message[] = []): Promise<string> {
   const requestModel: CompletionRequestModel = toModel(messages);
   const response = await fetch('http://localhost:5000/completions', {
     method: 'POST',

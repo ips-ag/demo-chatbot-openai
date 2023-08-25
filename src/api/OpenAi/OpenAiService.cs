@@ -46,7 +46,8 @@ internal class OpenAiService
     {
         List<ChatMessage> models = new()
         {
-            new ChatMessage(ChatRole.System, @"")
+            new ChatMessage(ChatRole.System, @"You are an AI chatbot answering only questions about IPS Software Vietnam.
+            Use maximum 10 words to answer each question.")
         };
         foreach (var message in messages.TakeLast(10))
         {
