@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import History, { Message } from './History';
+import History, { Message, MessageType } from './History';
 import { getCompletion } from '../services';
 import './ChatContainer.css';
 
@@ -19,13 +19,12 @@ function ChatContainer() {
 
   const handleSendClick = async () => {
     if (newMessage === '') return;
-    const response = await getCompletion(newMessage);
-    setHistory((prevHistory) => [
-      ...prevHistory,
-      { type: 'request', text: newMessage },
-      { type: 'response', text: response },
-    ]);
+    const userMessage: Message = { type: MessageType.User, text: newMessage };
+    const messages: Message[] = [...history, userMessage];
+    setHistory((prevHistory) => [...prevHistory, userMessage]);
     setNewMessage('');
+    const response = await getCompletion(messages);
+    setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
   };
 
   return (

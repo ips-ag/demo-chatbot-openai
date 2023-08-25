@@ -1,8 +1,13 @@
 import { useEffect, useRef } from 'react';
 import './History.css';
 
+export enum MessageType {
+  User = 'user',
+  Assistant = 'assistant',
+}
+
 export type Message = {
-  type: 'request' | 'response';
+  type: MessageType;
   text: string;
 };
 
