@@ -24,14 +24,14 @@ internal class OpenAiService
             configuration.DeploymentName,
             new ChatCompletionsOptions(messages)
             {
-                Temperature = (float)0.7,
-                MaxTokens = 800,
-                NucleusSamplingFactor = (float)0.95,
-                FrequencyPenalty = 0,
-                PresencePenalty = 0,
+                Temperature = configuration.CompletionOptions.Temperature,
+                MaxTokens = configuration.CompletionOptions.MaxTokens,
+                NucleusSamplingFactor = configuration.CompletionOptions.TopP,
+                FrequencyPenalty = configuration.CompletionOptions.FrequencyPenalty,
+                PresencePenalty = configuration.CompletionOptions.PresencePenalty,
             });
         ChatCompletions completions = response.Value;
-        var text = completions.Choices[0].Message.Content;
+        var text = completions.Choices.First().Message.Content;
         return new CompletionResponseModel
         {
             Message = new MessageModel
@@ -46,8 +46,21 @@ internal class OpenAiService
     {
         List<ChatMessage> models = new()
         {
-            new ChatMessage(ChatRole.System, @"You are an AI chatbot answering only questions about IPS Software Vietnam.
-            Use maximum 10 words to answer each question.")
+            new ChatMessage(
+                ChatRole.System,
+                """
+                * You are an IPS Software Vietnam chatbot Clara, your primary goal is to answer questions about Vietnam software company IPS Software Vietnam.
+                * Answer any question briefly, profesionally, but a bit informal.
+                * Answer truthfully, based on your current knowledge about IPS Software Vietnam company and include context found bellow.
+                * Do not answer questions that are not related to IPS Software Vietnam. In this case, you can answer "I can only answer questions related to IPS Software Vietnam".
+                * If you dont know the answer, direct the user to e-mail address info@ips-ag.com.
+                * Introduce yourself at the beggining.
+
+                Information about IPS Software Vietnam:
+                * IPS Software Vietnam is a software company based in Da Nang, Vietnam.
+                * IPS Software Vietnam is a subsidiary of IPS Solutions, a German owned company.
+                * IPS Solutions has development centers in Czech Republic and Vietnam.
+                """)
         };
         foreach (var message in messages.TakeLast(10))
         {

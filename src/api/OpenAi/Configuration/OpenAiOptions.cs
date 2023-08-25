@@ -19,4 +19,7 @@ public class OpenAiOptions
     [DataMember(Name = "deploymentName")]
     [Required]
     public required string DeploymentName { get; set; }
+
+    [DataMember(Name = "completion")]
+    public CompletionOptions CompletionOptions { get; set; } = new();
 }
