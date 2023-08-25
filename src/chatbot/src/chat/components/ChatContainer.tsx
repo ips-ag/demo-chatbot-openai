@@ -6,12 +6,15 @@ import './ChatContainer.css';
 function ChatContainer() {
   const [history, setHistory] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     console.log('Running initial effect');
     const getInitialCompletion = async () => {
-      const response = await getCompletion();
+      setIsSending(true);
+      const response = await getCompletion([]);
       setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
+      setIsSending(false);
     };
     getInitialCompletion();
   }, []);
@@ -31,12 +34,14 @@ function ChatContainer() {
   const handleSendClick = async () => {
     if (newMessage === '') return;
     console.log('Handling send click');
+    setIsSending(true);
     const userMessage: Message = { type: MessageType.User, text: newMessage };
     const messages: Message[] = [...history, userMessage];
     setHistory((prevHistory) => [...prevHistory, userMessage]);
     setNewMessage('');
     const response = await getCompletion(messages);
     setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
+    setIsSending(false);
   };
 
   return (
@@ -52,7 +57,9 @@ function ChatContainer() {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
-        <button onClick={handleSendClick}>Send</button>
+        <button onClick={handleSendClick} disabled={isSending}>
+          Send
+        </button>
       </div>
     </div>
   );
