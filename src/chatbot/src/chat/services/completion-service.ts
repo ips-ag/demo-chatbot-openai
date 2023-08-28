@@ -3,7 +3,8 @@ import { CompletionRequestModel, CompletionResponseModel, MessageTypeModel } fro
 
 export async function getCompletion(messages: Message[] = []): Promise<string> {
   const requestModel: CompletionRequestModel = toModel(messages);
-  const response = await fetch('http://localhost:5000/completions', {
+  const endpoint = `${process.env.REACT_APP_API_URL}/completions`;
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
