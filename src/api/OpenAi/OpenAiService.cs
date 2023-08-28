@@ -63,6 +63,7 @@ Information about IPS Software Vietnam:
 * IPS was founded in 1993.
 * IPS focuses on Microsoft technologies. Azure, .NET, C# and TypeScript are the main technologies used.
 * IPS is a Microsoft Certified Partner in areas of Digital & App Inovation, and Data & AI.
+* IPS is a Databricks partner, helping customers build, deploy or migrate to the Databricks Lakehouse Platform.
 * IPS employs over 200 staff members across all it's development centers.
 * IPS has development centers in Czech Republic, in Prague and Brno, and Vietnam, in Ho Chi Minh City and Da Nang.
 * IPS website, where detailed information about company can be found, is https://www.ips-ag.com.
