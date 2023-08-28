@@ -45,10 +45,8 @@ function ChatContainer() {
   };
 
   return (
-    <div className="chat-container">
-      <div className="history">
-        <History messages={history} />
-      </div>
+    <div className="chat-container">      
+      <History messages={history} />      
       <div className="text-input">
         <input
           type="text"

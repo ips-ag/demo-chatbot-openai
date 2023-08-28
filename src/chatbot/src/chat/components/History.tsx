@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './History.css';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export enum MessageType {
   User = 'user',
@@ -31,9 +33,9 @@ function History(props: Props) {
   return (
     <div ref={historyRef} className="history">
       {messages.map((message, index) => (
-        <p key={index} className={`message ${message.type}`}>
-          {message.text}
-        </p>
+        <div key={index} className={`message ${message.type}`}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.text}</ReactMarkdown>
+        </div>
       ))}
     </div>
   );
