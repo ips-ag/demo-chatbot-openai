@@ -13,7 +13,9 @@ function ChatContainer() {
     const getInitialCompletion = async () => {
       setIsSending(true);
       const response = await getCompletion([]);
-      setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
+      if (response !== undefined) {
+        setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
+      }
       setIsSending(false);
     };
     getInitialCompletion();
@@ -40,13 +42,15 @@ function ChatContainer() {
     setHistory((prevHistory) => [...prevHistory, userMessage]);
     setNewMessage('');
     const response = await getCompletion(messages);
-    setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
+    if (response !== undefined) {
+      setHistory((prevHistory) => [...prevHistory, { type: MessageType.Assistant, text: response }]);
+    }
     setIsSending(false);
   };
 
   return (
-    <div className="chat-container">      
-      <History messages={history} />      
+    <div className="chat-container">
+      <History messages={history} />
       <div className="text-input">
         <input
           type="text"

@@ -1,7 +1,7 @@
 import { Message, MessageType } from '../components/History';
 import { CompletionRequestModel, CompletionResponseModel, MessageTypeModel } from './models';
 
-export async function getCompletion(messages: Message[] = []): Promise<string> {
+export async function getCompletion(messages: Message[] = []): Promise<string | undefined> {
   const requestModel: CompletionRequestModel = toModel(messages);
   const endpoint = `${process.env.REACT_APP_API_URL}/completions`;
   const response = await fetch(endpoint, {
@@ -12,7 +12,8 @@ export async function getCompletion(messages: Message[] = []): Promise<string> {
     body: JSON.stringify(requestModel),
   });
   if (!response.ok) {
-    throw new Error(`Failed to get completions: ${response.statusText}`);
+    console.error(`Failed to get completions: ${response.statusText}`);
+    return undefined;
   }
   const completions = (await response.json()) as CompletionResponseModel;
   return completions.message.text;

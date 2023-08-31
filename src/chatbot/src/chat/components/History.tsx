@@ -34,7 +34,7 @@ function History(props: Props) {
     <div ref={historyRef} className="history">
       {messages.map((message, index) => (
         <div key={index} className={`message ${message.type}`}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.text}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.text ?? ''}</ReactMarkdown>
         </div>
       ))}
     </div>
