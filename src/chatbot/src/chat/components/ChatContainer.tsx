@@ -35,6 +35,7 @@ function ChatContainer() {
 
   const handleSendClick = async () => {
     if (newMessage === '') return;
+    if (isSending) return;
     console.log('Handling send click');
     setIsSending(true);
     const userMessage: Message = { type: MessageType.User, text: newMessage };
