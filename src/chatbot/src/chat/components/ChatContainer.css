@@ -10,7 +10,7 @@
 
 .text-input {
   width: 100%;
-  padding: 1rem 0px 1.5rem;
+  padding: 0.25rem 0rem 0.5rem;
   background-color: #17428c;
   font-size: calc(10px + 2.3vmin);
 }
