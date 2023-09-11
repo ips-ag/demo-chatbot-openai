@@ -1,2 +1,3 @@
-# demo-chatbot-openai
-Building GPT-based chatbot using Azure OpenAI service
+# IPS Open Day 2023
+
+This repository contains all source code presented during the IPS Open Day 2023.
